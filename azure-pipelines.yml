@@ -24,49 +24,50 @@ stages:
   - job: vefiry_code
     displayName: Run sonar
     steps:
-    - task: SonarQubePrepare@5
+    - task: SonarCloudPrepare@1
       inputs:
-        SonarQube: 'Sonnarqube'
+        SonarCloud: 'SonarCloud'
+        organization: 'show0804'
         scannerMode: 'CLI'
         configMode: 'manual'
-        cliProjectKey: 'azure-github'
-        cliProjectName: 'sonarqube-azure-github'
+        cliProjectKey: 'show0804_azure-github-public'
+        cliProjectName: 'azure-github-public'
         cliSources: '.'
     
-    - task: SonarQubeAnalyze@5
-    - task: SonarQubePublish@5
-      inputs:
-        pollingTimeoutSec: '300'
+    # - task: SonarQubeAnalyze@5
+    # - task: SonarQubePublish@5
+    #   inputs:
+    #     pollingTimeoutSec: '300'
 
-- stage: check_application
-  displayName: Run tests and verify lint.
-  jobs:
-  - job: run_application
-    displayName: Run application
-    steps:
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Azure-DockerHub'
-        dockerComposeFile: '**/docker-compose.yaml'
-        dockerComposeFileArgs: 'KEYCLOAK_TOKEN=123'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'up'
-        arguments: '-d'
+# - stage: check_application
+#   displayName: Run tests and verify lint.
+#   jobs:
+#   - job: run_application
+#     displayName: Run application
+#     steps:
+#     - task: DockerCompose@0
+#       inputs:
+#         containerregistrytype: 'Container Registry'
+#         dockerRegistryEndpoint: 'Azure-DockerHub'
+#         dockerComposeFile: '**/docker-compose.yaml'
+#         dockerComposeFileArgs: 'KEYCLOAK_TOKEN=123'
+#         action: 'Run a Docker Compose command'
+#         dockerComposeCommand: 'up'
+#         arguments: '-d'
         
-    - task: CmdLine@2
-      inputs:
-        script: |
-          docker ps
+#     - task: CmdLine@2
+#       inputs:
+#         script: |
+#           docker ps
           
-          docker image ls
+#           docker image ls
 
-          docker run igorcsilvaazuregithub_nodeapp npm test
+#           docker run igorcsilvaazuregithub_nodeapp npm test
 
-    - task: CmdLine@2
-      inputs:
-        script: |
-          docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
+#     - task: CmdLine@2
+#       inputs:
+#         script: |
+#           docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
 
 # - stage: buildAndPush
 #   displayName: $(labelBuildAndPush) the image
