@@ -10,13 +10,13 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  labelBuildAndPush: Build_and_push
+  labelBuildAndPush: Build and push
 
 stages:
-- stage: $(labelBuildAndPush)
+- stage: buildAndPush
   displayName: $(labelBuildAndPush) the image
   jobs:
-  - job: Build_and_push
+  - job: buildAndPush
     displayName: $(labelBuildAndPush)
     pool:
       vmImage: ubuntu-latest
