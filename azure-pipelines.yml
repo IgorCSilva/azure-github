@@ -38,6 +38,7 @@ stages:
           
           docker image ls
 
+          docker run igorcsilvaazuregithub_nodeapp npm test
 # - stage: buildAndPush
 #   displayName: $(labelBuildAndPush) the image
 #   jobs:
