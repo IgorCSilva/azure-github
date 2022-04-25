@@ -16,10 +16,10 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: run_application
-  displayName: Run docker-compose file
+- stage: check_application
+  displayName: Run tests and verify lint.
   jobs:
-  - job: run
+  - job: run_application
     displayName: Run application
     steps:
     - task: DockerCompose@0
@@ -31,21 +31,10 @@ stages:
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'up'
         arguments: '-d'
-    
-    # - task: CmdLine@2
-    #   inputs:
-    #     script: |
-    #       docker ps
-          
-    #       docker image ls
-
-    #       docker run igorcsilvaazuregithub_nodeapp npm test
-- stage: test
-  displayName: Test the application
-  jobs:
-  - job: test
+  
+  - job: test_application
     displayName: Test application
-    steps:    
+    steps:
     - task: CmdLine@2
       inputs:
         script: |
@@ -54,6 +43,15 @@ stages:
           docker image ls
 
           docker run igorcsilvaazuregithub_nodeapp npm test
+
+  - job: verify_lint
+    displayName: Verify lint
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
+
 # - stage: buildAndPush
 #   displayName: $(labelBuildAndPush) the image
 #   jobs:
