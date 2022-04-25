@@ -12,14 +12,15 @@ variables:
   tag: '$(Build.BuildId)'
   labelBuildAndPush: Build and push
 
+pool:
+  vmImage: ubuntu-latest
+
 stages:
-- stage: test
-  displayName: Test the application
+- stage: run_application
+  displayName: Run docker-compose file
   jobs:
-  - job: test
-    displayName: Test application
-    pool:
-      vmImage: ubuntu-latest
+  - job: run
+    displayName: Run application
     steps:
     - task: DockerCompose@0
       inputs:
@@ -31,6 +32,20 @@ stages:
         dockerComposeCommand: 'up'
         arguments: '-d'
     
+    # - task: CmdLine@2
+    #   inputs:
+    #     script: |
+    #       docker ps
+          
+    #       docker image ls
+
+    #       docker run igorcsilvaazuregithub_nodeapp npm test
+- stage: test
+  displayName: Test the application
+  jobs:
+  - job: test
+    displayName: Test application
+    steps:    
     - task: CmdLine@2
       inputs:
         script: |
