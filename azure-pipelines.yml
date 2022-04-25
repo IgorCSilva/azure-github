@@ -18,6 +18,18 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
+- stage: verify_code
+  displayName: Verify code beauty and security
+  jobs:
+  - job: vefiry_code
+    displayName: Run sonar
+    steps:
+    - task: SonarQubePrepare@5
+      inputs:
+        SonarQube: 'Sonnarqube'
+        scannerMode: 'CLI'
+        configMode: 'file'
+        
 - stage: check_application
   displayName: Run tests and verify lint.
   jobs:
