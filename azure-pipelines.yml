@@ -29,7 +29,12 @@ stages:
         SonarQube: 'Sonnarqube'
         scannerMode: 'CLI'
         configMode: 'file'
-        
+    
+    - task: SonarQubeAnalyze@5
+    - task: SonarQubePublish@5
+      inputs:
+        pollingTimeoutSec: '300'
+
 - stage: check_application
   displayName: Run tests and verify lint.
   jobs:
