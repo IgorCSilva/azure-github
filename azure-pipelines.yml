@@ -34,4 +34,4 @@ stages:
         repository: 'igoru23/azure-github'
         command: 'buildAndPush'
         Dockerfile: './node/Dockerfile'
-        buildContext: '.'
+        buildContext: './node'
