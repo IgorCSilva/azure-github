@@ -10,7 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  labelBuildAndPush: 'Build_and_push'
+  labelBuildAndPush: Build_and_push
 
 stages:
 - stage: $(labelBuildAndPush)
