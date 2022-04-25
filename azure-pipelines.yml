@@ -28,7 +28,10 @@ stages:
       inputs:
         SonarQube: 'Sonnarqube'
         scannerMode: 'CLI'
-        configMode: 'file'
+        configMode: 'manual'
+        cliProjectKey: 'azure-github'
+        cliProjectName: 'sonarqube-azure-github'
+        cliSources: '.'
     
     - task: SonarQubeAnalyze@5
     - task: SonarQubePublish@5
