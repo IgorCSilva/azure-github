@@ -10,39 +10,40 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  labelBuildAndPush: 'Build and push'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: $(labelBuildAndPush)
+  displayName: $(labelBuildAndPush) the image
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Build_and_push
+    displayName: $(labelBuildAndPush)
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Azure-DockerHub'
-        repository: 'igoru23/azure-github'
-        command: 'push'
-        tags: |
-          $(Build.BuildId)
-          biruliro
-
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
+    #     tags: |
+    #       $(tag)
     # - task: Docker@2
     #   inputs:
     #     containerRegistry: 'Azure-DockerHub'
     #     repository: 'igoru23/azure-github'
-    #     command: 'buildAndPush'
-    #     Dockerfile: './node/Dockerfile'
-    #     buildContext: './node'
+    #     command: 'push'
     #     tags: |
     #       $(Build.BuildId)
-    #       latest
+    #       biruliro
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Azure-DockerHub'
+        repository: 'igoru23/azure-github'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/node'
+        tags: |
+          $(tag)
+          latest
