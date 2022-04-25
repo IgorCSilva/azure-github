@@ -31,10 +31,7 @@ stages:
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'up'
         arguments: '-d'
-  
-  - job: test_application
-    displayName: Test application
-    steps:
+        
     - task: CmdLine@2
       inputs:
         script: |
@@ -44,9 +41,6 @@ stages:
 
           docker run igorcsilvaazuregithub_nodeapp npm test
 
-  - job: verify_lint
-    displayName: Verify lint
-    steps:
     - task: CmdLine@2
       inputs:
         script: |
