@@ -28,6 +28,9 @@ jobs:
           mkdir -p artifacts/store
           cp docs.md artifacts/store/docs.md
           ls artifacts/store
+          cat artifacts/store/docs.md
+          cd artifacts/store
+          pwd
 
     # - run: echo hello > path/to/artifact/world.txt
 
