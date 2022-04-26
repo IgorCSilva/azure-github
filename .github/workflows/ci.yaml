@@ -31,13 +31,11 @@ jobs:
       # - run: ls artifacts/store 
 
       - name: Build the stack
-        run: |
-          docker-compose up -d --build
-          docker exec nodeapp npm test
+        run: docker-compose up -d --build
           
-      # - name: Test app
-      #   run: |
-      #     docker exec nodeapp npm test
+      - name: Test app
+        run: |
+          docker run --user 1001 azure-github_nodeapp npm test
 
       - name: Coverage folder
         run: |
