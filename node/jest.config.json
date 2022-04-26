@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "app",
   "jest": {
     "coverageDirectory": "./coverage/"
   }
