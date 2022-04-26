@@ -39,10 +39,12 @@ jobs:
       - name: Get coverage info
         run: |
           docker exec nodeapp ls
-          docker cp nodeapp:/usr/src/app/coverage artifacts/
+          docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/
       
       - name: List artifacts
-        run: ls artifacts/coverage
+        run: |
+          ls artifacts/
+          cat artifacts/lcov.info
 
       - name: List artifacts 2
         run: ls artifacts/coverage/coverage
