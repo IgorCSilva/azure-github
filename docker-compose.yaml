@@ -31,7 +31,7 @@ services:
       - db
     volumes:
       - ./node:/usr/src/app
-      - ./node/coverage:/usr/src/app/coverage
+      # - ./node/coverage:/usr/src/app/coverage
     tty: true
 
   # MySQL database.
