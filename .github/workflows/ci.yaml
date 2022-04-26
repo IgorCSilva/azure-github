@@ -79,7 +79,7 @@ jobs:
         ref: ${{ github.sha }}
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         running-workflow-name: wait-for-check-regexp
-        check-regexp: *SonarCloud*
+        check-regexp: SonarCloud.*
 
     - name: Azure Pipelines Action
       uses: Azure/pipelines@v1
