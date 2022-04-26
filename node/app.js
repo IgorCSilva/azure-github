@@ -25,14 +25,6 @@ function as(a, b) {
 function sd(a, b) {
   return a - b
 }
-
-function df(a, b) {
-  return a - b
-}
-
-function fa(a, b) {
-  return a - b
-}
 module.exports = {
   sum,
   sub,
