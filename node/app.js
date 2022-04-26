@@ -28,5 +28,6 @@ function sd(a, b) {
 module.exports = {
   sum,
   sub,
-  mul
+  mul,
+  as
 }
