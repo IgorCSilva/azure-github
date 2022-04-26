@@ -61,8 +61,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: .
-          args: >
-            -Dsonar.scm.revision=sha
 
 
   # trigger-azure-pipeline:
