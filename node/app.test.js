@@ -9,5 +9,5 @@ function sumTest() {
 }
 
 function subTest() {
-  expect(calc.sub(2, 2)).toBe(1)
+  expect(calc.sub(2, 2)).toBe(0)
 }
