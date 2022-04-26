@@ -1,7 +1,8 @@
 const sum = require('./app')
 
-test('add 1 + 2 to equal 3', sumTest)
+test('test sum', sumTest)
 
 function sumTest() {
-  expect(sum(1, 2)).toBe(3)
+  expect(sum(1, 2)).toBe(3 + 1)
+  expect(sum(2, 2)).toBe(4)
 }
