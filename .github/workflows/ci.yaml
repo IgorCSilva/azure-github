@@ -50,9 +50,6 @@ jobs:
       - name: Coverage folder
         run: |
           docker exec nodeapp ls
-          docker exec nodeapp npm install
-          docker exec nodeapp npm test
-          docker exec nodeapp ls
 
       
       # - run: mkdir -p artifacts/
