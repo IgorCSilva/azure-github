@@ -22,8 +22,7 @@ services:
     # Wait for the database to be ready.
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
     command: >
-      bash -c "npm install
-      && node index.js"
+      bash -c "node index.js"
     
     networks:
       - nodenet
