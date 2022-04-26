@@ -76,11 +76,11 @@ jobs:
     - name: Wait for other checks to succeed
       uses: lewagon/wait-on-check-action@v1.0.0
       with:
-        ref: ${{ github.sha }}
+        ref: ${{ github.ref }}
+        check-name: 'SonarCloud Code Analysis'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        running-workflow-name: wait-for-check-regexp
-        check-regexp: SonarCloud.*
-
+        wait-interval: 10
+        
     - name: Azure Pipelines Action
       uses: Azure/pipelines@v1
       with:
