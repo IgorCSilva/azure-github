@@ -37,15 +37,19 @@ jobs:
       #   run: |
       #     docker run --user 1001 azure-github_nodeapp npm test
 
+      - name: list users
+        run: |
+          docker run azure-github_nodeapp su -c 'exec ps aux'
+      - name: Permit user root
+        run: |
+          docker run azure-github_nodeapp su -c 'chown -R root .'
       - name: Test app
         run: |
-          docker exec nodeapp mkdir new_folder
-          sudo chmod a+rwx .
           docker run azure-github_nodeapp npm test
 
-      - name: Coverage folder
-        run: |
-          docker exec nodeapp ls
+      # - name: Coverage folder
+      #   run: |
+      #     docker exec nodeapp ls
       
       # - run: mkdir -p artifacts/
 

@@ -1,6 +1,6 @@
 {
   "name": "app",
   "jest": {
-    "coverageDirectory": "./coverage/"
+    "coverageDirectory": "coverage/"
   }
 }
