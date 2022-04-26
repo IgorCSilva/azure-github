@@ -4,8 +4,8 @@
 
 trigger: none
 
-pr:
-- master
+pr: none
+# - master
 
 resources:
 - repo: self
