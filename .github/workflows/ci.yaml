@@ -34,7 +34,7 @@ jobs:
       - name: Test app
         run: docker run azure-github_nodeapp npm test
       
-      - run: mkdir -p artifacts
+      - run: mkdir -p artifacts/
 
       - name: Get coverage info
         run: |
@@ -43,6 +43,9 @@ jobs:
       
       - name: List artifacts
         run: ls artifacts/coverage
+
+      - name: List artifacts 2
+        run: ls artifacts/coverage/coverage
 
   # verify_code:
   #   name: Verify code security and beauty.
