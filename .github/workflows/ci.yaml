@@ -35,7 +35,7 @@ jobs:
           
       - name: Test app
         run: |
-          docker run azure-github_nodeapp npm test
+          docker exec nodeapp npm test
 
       - name: Coverage folder
         run: |
