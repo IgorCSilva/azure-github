@@ -19,32 +19,15 @@ jobs:
       #   run: |
       #     ls /home/runner/work/azure-github/azure-github
 
-      
-
       - name: Build the stack
         run: docker-compose up -d --build
-          
-      # - name: Test app
-      #   run: |
-      #     docker run --user 1001 azure-github_nodeapp npm test
 
-      # - name: list users
-      #   run: |
-      #     docker run azure-github_nodeapp su -c 'exec ps aux'
-      # - name: Permit user root
-      #   run: |
-      #     docker run azure-github_nodeapp su -c 'chown -R root .'
-      # - name: Test app
-      #   run: |
-      #     docker run azure-github_nodeapp npm test
-
-      - name: Coverage folder
+      - name: Run tests
         run: |
-          docker exec nodeapp ls
           docker exec nodeapp npm install
           docker exec nodeapp npm test
-          docker exec nodeapp ls
 
+      - name: Save coverage file
       - run: |
           mkdir -p artifacts/store
           docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/store/lcov.info
@@ -54,25 +37,9 @@ jobs:
           name: my-artifact
           path: artifacts/store/lcov.info
 
-      - run: |
-          ls artifacts/store
-          cat artifacts/store/lcov.info
-
-
-      # - run: mkdir -p artifacts/
-
-      # - name: Get coverage info
-      #   run: |
-      #     docker exec nodeapp ls
-      #     docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/
-      
-      # - name: List artifacts
-      #   run: |
-      #     ls artifacts/
-      #     cat artifacts/lcov.info
-
-      # - name: List artifacts 2
-      #   run: ls artifacts/coverage/coverage
+      # - run: |
+      #     ls artifacts/store
+      #     cat artifacts/store/lcov.info
 
   verify_code:
     name: Verify code security and beauty.
@@ -88,7 +55,7 @@ jobs:
           name: my-artifact
           path: artifacts/store
           
-      - run: cat artifacts/store/lcov.info
+      # - run: cat artifacts/store/lcov.info
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -99,14 +66,14 @@ jobs:
           projectBaseDir: .
 
 
-  # build:
-  #   name: Call Azure Pipeline
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Azure Pipelines Action
-  #     uses: Azure/pipelines@v1
-  #     with:
-  #       # Not use trailing slash.
-  #       azure-devops-project-url: https://dev.azure.com/show0804/azure-github
-  #       azure-pipeline-name: 'IgorCSilva.azure-github'
-  #       azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+  trigger-azure-pipeline:
+    name: Trigger Azure Pipeline
+    runs-on: ubuntu-latest
+    steps:
+    - name: Azure Pipelines Action
+      uses: Azure/pipelines@v1
+      with:
+        # Not use trailing slash.
+        azure-devops-project-url: https://dev.azure.com/show0804/azure-github
+        azure-pipeline-name: 'IgorCSilva.azure-github'
+        azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
