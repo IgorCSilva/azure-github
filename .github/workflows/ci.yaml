@@ -34,12 +34,12 @@ jobs:
       - name: Test app
         run: docker run azure-github_nodeapp npm test
       
-      - run: mkdir -p artifacts/coverage
+      - run: mkdir -p artifacts
 
       - name: Get coverage info
         run: |
           docker exec nodeapp ls
-          docker cp nodeapp:/usr/src/app/coverage/ artifacts/coverage
+          docker cp nodeapp:/usr/src/app/coverage artifacts/
       
       - name: List artifacts
         run: ls artifacts/coverage
@@ -56,6 +56,8 @@ jobs:
   #       env:
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
   #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #       with:
+
 
   # build:
   #   name: Call Azure Pipeline
