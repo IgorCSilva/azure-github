@@ -10,9 +10,9 @@ on:
       - master
 
 jobs:
-  check-application:
-    runs-on: ubuntu-latest
-    steps:
+  # check-application:
+  #   runs-on: ubuntu-latest
+  #   steps:
     # - uses: actions/checkout@v2
 
     # - run: mkdir -p path/to/artifact
