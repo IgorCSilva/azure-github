@@ -13,29 +13,30 @@ jobs:
   check-application:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Build the stack
-        run: docker-compose up -d --build
-      
-      - name: List containers
-        run: docker ps
-      
-      - name: List images
-        run: docker image ls
-      
-      # - name: List networks
-      #   run: docker network ls
+    - run: mkdir -p path/to/artifact
+
+    - run: echo hello > path/to/artifact/world.txt
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: path/to/artifact/world.txt
+      # - uses: actions/checkout@v2
+
+      # - name: Build the stack
+      #   run: docker-compose up -d --build
           
-      - name: Test app
-        run: |
-          docker run azure-github_nodeapp ls
-          docker run azure-github_nodeapp npm test
+      # - name: Test app
+      #   run: |
+      #     docker run azure-github_nodeapp ls
+      #     docker run azure-github_nodeapp npm test
 
-      - name: Get coverage info
-        run: |
-          docker exec nodeapp ls
-          docker cp nodeapp:/usr/src/app/coverage .
+      # - name: Get coverage info
+      #   run: |
+      #     docker exec nodeapp ls
+      #     docker cp nodeapp:/usr/src/app/coverage .
 
   # verify_code:
   #   name: Verify code security and beauty.
