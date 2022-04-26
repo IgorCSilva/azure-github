@@ -4,8 +4,8 @@
 
 trigger: none
 
-pr:
-- master
+pr: none
+# - master
 
 resources:
 - repo: self
@@ -18,35 +18,67 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
+# - stage: verify_code
+#   displayName: Verify code beauty and security
+#   jobs:
+#   - job: vefiry_code
+#     displayName: Run sonar
+#     steps:
+#     - task: SonarCloudPrepare@1
+#       inputs:
+#         SonarCloud: 'SonarCloud'
+#         organization: 'show0804'
+#         scannerMode: 'CLI'
+#         configMode: 'manual'
+#         cliProjectKey: 'show0804_azure-github-public'
+#         cliProjectName: 'azure-github-public'
+#         cliSources: '.'
+    
+#     - task: SonarCloudAnalyze@1
+
+#     - task: SonarCloudPublish@1
+#       inputs:
+#         pollingTimeoutSec: '300'
+    # - task: SonarQubeAnalyze@5
+    # - task: SonarQubePublish@5
+    #   inputs:
+    #     pollingTimeoutSec: '300'
+
 - stage: check_application
   displayName: Run tests and verify lint.
   jobs:
   - job: run_application
     displayName: Run application
     steps:
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Azure-DockerHub'
-        dockerComposeFile: '**/docker-compose.yaml'
-        dockerComposeFileArgs: 'KEYCLOAK_TOKEN=123'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'up'
-        arguments: '-d'
-        
+    # - task: DockerCompose@0
+    #   inputs:
+    #     containerregistrytype: 'Container Registry'
+    #     dockerRegistryEndpoint: 'Azure-DockerHub'
+    #     dockerComposeFile: '**/docker-compose.yaml'
+    #     dockerComposeFileArgs: 'KEYCLOAK_TOKEN=123'
+    #     action: 'Run a Docker Compose command'
+    #     dockerComposeCommand: 'up'
+    #     arguments: '-d'
+
     - task: CmdLine@2
       inputs:
         script: |
-          docker ps
+          echo Foi
+          echo Show
+
+    # - task: CmdLine@2
+    #   inputs:
+    #     script: |
+    #       docker ps
           
-          docker image ls
+    #       docker image ls
 
-          docker run igorcsilvaazuregithub_nodeapp npm test
+    #       docker run igorcsilvaazuregithub_nodeapp npm test
 
-    - task: CmdLine@2
-      inputs:
-        script: |
-          docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
+    # - task: CmdLine@2
+    #   inputs:
+    #     script: |
+    #       docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
 
 # - stage: buildAndPush
 #   displayName: $(labelBuildAndPush) the image
