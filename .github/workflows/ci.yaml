@@ -9,40 +9,40 @@ on:
     branches: 
       - master
 
-      # name: Build
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     types: [opened, synchronize, reopened]
-# jobs:
-#   sonarcloud:
-#     name: SonarCloud
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-#       - name: SonarCloud Scan
-#         uses: SonarSource/sonarcloud-github-action@master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
 jobs:
-  verify_code:
-    name: Verify code security and beauty.
+  check-application:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Build the stack
+        run: docker-compose up -d --build
+      
+      - name: List containers
+        run: docker ps
+      
+      - name: List images
+        run: docker image ls
+      
+      # - name: List networks
+      #   run: docker network ls
+          
+      # - name: Test app
+      #   run: |
+      #     docker run fc-docker-desafio-nginx-node-mysql_nodeapp npm test
+
+  # verify_code:
+  #   name: Verify code security and beauty.
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarcloud-github-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   # build:
   #   name: Call Azure Pipeline
