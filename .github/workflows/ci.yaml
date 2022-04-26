@@ -28,7 +28,7 @@ jobs:
           docker exec nodeapp npm test
 
       - name: Save coverage file
-      - run: |
+        run: |
           mkdir -p artifacts/store
           docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/store/lcov.info
 
