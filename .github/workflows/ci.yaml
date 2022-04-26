@@ -39,7 +39,7 @@ jobs:
       - name: Get coverage info
         run: |
           docker exec nodeapp ls
-          docker cp nodeapp:/usr/src/app/coverage artifacts/coverage
+          docker cp nodeapp:/usr/src/app/coverage/ artifacts/coverage
       
       - name: List artifacts
         run: ls artifacts/coverage
