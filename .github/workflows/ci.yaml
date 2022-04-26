@@ -35,6 +35,7 @@ jobs:
       - name: Get coverage info
         run: |
           docker exec nodeapp ls
+          docker cp nodeapp:/coverage .
 
   # verify_code:
   #   name: Verify code security and beauty.
