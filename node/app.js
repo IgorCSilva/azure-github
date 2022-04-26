@@ -18,7 +18,19 @@ function mul(a, b) {
   return a - b
 }
 
-function div(a, b) {
+function as(a, b) {
+  return a - b
+}
+
+function sd(a, b) {
+  return a - b
+}
+
+function df(a, b) {
+  return a - b
+}
+
+function fa(a, b) {
   return a - b
 }
 module.exports = {
