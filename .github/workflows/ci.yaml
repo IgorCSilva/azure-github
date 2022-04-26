@@ -23,6 +23,8 @@ jobs:
       with:
         name: my-artifact
         path: path/to/artifact/world.txt
+        
+    - run: ls path/to/artifact
       # - uses: actions/checkout@v2
 
       # - name: Build the stack
