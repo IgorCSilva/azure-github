@@ -40,6 +40,7 @@ jobs:
       - name: Test app
         run: |
           docker exec nodeapp mkdir new_folder
+          sudo chmod a+rwx .
           docker run azure-github_nodeapp npm test
 
       - name: Coverage folder
