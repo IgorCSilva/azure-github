@@ -1,0 +1,41 @@
+name: Automate-PullRequest
+
+# Run this workflow every time a commit gets pushed to main or a pull request gets opened against main
+on:
+  push:
+    branches:
+      - develop
+
+jobs: 
+ create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "master"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "feature, automated pr"
+          pr_title: "[Example] Simple demo" 
+  # trigger-azure-pipeline:
+  #   name: Trigger Azure Pipeline
+  #   runs-on: ubuntu-latest
+  #   needs: [verify_code]
+  #   steps:
+  #   - name: Wait for other checks to succeed
+  #     uses: lewagon/wait-on-check-action@v1.0.0
+  #     with:
+  #       ref: ${{ github.ref }}
+  #       check-name: 'SonarCloud Code Analysis'
+  #       repo-token: ${{ secrets.GITHUB_TOKEN }}
+  #       wait-interval: 10
+        
+  #   - name: Azure Pipelines Action
+  #     uses: Azure/pipelines@v1
+  #     with:
+  #       # Not use trailing slash.
+  #       azure-devops-project-url: https://dev.azure.com/show0804/azure-github
+  #       azure-pipeline-name: 'IgorCSilva.azure-github'
+  #       azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}

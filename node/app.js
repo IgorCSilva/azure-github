@@ -10,4 +10,24 @@ function sum(a, b) {
   return result
 }
 
-module.exports = sum;
+function sub(a, b) {
+  return a - b
+}
+
+function mul(a, b) {
+  return a - b
+}
+
+function as(a, b) {
+  return a - b
+}
+
+function sd(a, b) {
+  return a - b
+}
+module.exports = {
+  sum,
+  sub,
+  mul,
+  as
+}
