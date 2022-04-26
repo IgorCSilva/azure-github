@@ -3,11 +3,13 @@ SF:app.js
 FN:1,sum
 FN:13,sub
 FN:17,mul
-FNF:3
+FN:21,div
+FNF:4
 FNH:1
 FNDA:2,sum
 FNDA:0,sub
 FNDA:0,mul
+FNDA:0,div
 DA:2,2
 DA:4,2
 DA:5,1
@@ -15,8 +17,9 @@ DA:7,1
 DA:10,2
 DA:14,0
 DA:18,0
-DA:20,1
-LF:8
+DA:22,0
+DA:24,1
+LF:9
 LH:6
 BRDA:4,0,0,1
 BRDA:4,0,1,1

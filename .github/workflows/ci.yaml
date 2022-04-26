@@ -26,14 +26,14 @@ jobs:
 
       - run: |
           mkdir -p artifacts/store
-          cp docs.md artifacts/store/docs.md
+          cp node/lcov.info artifacts/store/lcov.info
 
     # - run: echo hello > path/to/artifact/world.txt
 
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: artifacts/store/docs.md
+          path: artifacts/store/lcov.info
 
       - run: ls artifacts/store 
 
@@ -62,21 +62,21 @@ jobs:
       # - name: List artifacts 2
       #   run: ls artifacts/coverage/coverage
 
-  # verify_code:
-  #   name: Verify code security and beauty.
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+  verify_code:
+    name: Verify code security and beauty.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-  #     - name: SonarCloud Scan
-  #       uses: SonarSource/sonarcloud-github-action@master
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #       with:
-  #         projectBaseDir: .
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
 
 
   # build:
