@@ -29,7 +29,12 @@ jobs:
           
       - name: Test app
         run: |
+          docker run azure-github_nodeapp ls
           docker run azure-github_nodeapp npm test
+
+      - name: Get coverage info
+        run: |
+          docker run azure-github_nodeapp ls
 
   # verify_code:
   #   name: Verify code security and beauty.
