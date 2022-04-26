@@ -19,16 +19,7 @@ jobs:
       #   run: |
       #     ls /home/runner/work/azure-github/azure-github
 
-      # - run: |
-      #     mkdir -p artifacts/store
-      #     cp node/lcov.info artifacts/store/lcov.info
-
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: my-artifact
-      #     path: artifacts/store/lcov.info
-
-      # - run: ls artifacts/store 
+      
 
       - name: Build the stack
         run: docker-compose up -d --build
@@ -51,11 +42,23 @@ jobs:
         run: |
           docker exec nodeapp ls
           docker exec nodeapp npm install
-          docker exec nodeapp ls
           docker exec nodeapp npm test
           docker exec nodeapp ls
 
-      
+      - run: |
+          mkdir -p artifacts/store
+          docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/store/lcov.info
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifacts/store/lcov.info
+
+      - run: |
+          ls artifacts/store
+          cat artifacts/store/lcov.info
+
+
       # - run: mkdir -p artifacts/
 
       # - name: Get coverage info
