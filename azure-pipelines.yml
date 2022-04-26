@@ -66,7 +66,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'Azure-DockerHub'
+        containerRegistry: 'Dockerhub'
         repository: 'igoru23/azure-github'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
