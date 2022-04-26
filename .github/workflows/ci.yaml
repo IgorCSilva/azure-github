@@ -33,9 +33,13 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d --build
           
+      # - name: Test app
+      #   run: |
+      #     docker run --user 1001 azure-github_nodeapp npm test
+
       - name: Test app
         run: |
-          docker run --user 1001 azure-github_nodeapp npm test
+          docker exec nodeapp mkdir new_folder
 
       - name: Coverage folder
         run: |
