@@ -8,6 +8,6 @@ function sumTest() {
   expect(calc.sum(2, 2)).toBe(4)
 }
 
-function sumTest() {
+function subTest() {
   expect(calc.sub(2, 2)).toBe(1)
 }
