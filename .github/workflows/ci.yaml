@@ -27,9 +27,9 @@ jobs:
       # - name: List networks
       #   run: docker network ls
           
-      # - name: Test app
-      #   run: |
-      #     docker run fc-docker-desafio-nginx-node-mysql_nodeapp npm test
+      - name: Test app
+        run: |
+          docker exec nodeapp npm test
 
   # verify_code:
   #   name: Verify code security and beauty.
