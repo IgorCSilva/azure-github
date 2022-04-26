@@ -32,22 +32,24 @@ jobs:
         run: docker-compose up -d --build
           
       - name: Test app
-        run: docker run azure-github_nodeapp npm test
-      
-      - run: mkdir -p artifacts/
-
-      - name: Get coverage info
         run: |
+          docker run azure-github_nodeapp npm test
           docker exec nodeapp ls
-          docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/
       
-      - name: List artifacts
-        run: |
-          ls artifacts/
-          cat artifacts/lcov.info
+      # - run: mkdir -p artifacts/
 
-      - name: List artifacts 2
-        run: ls artifacts/coverage/coverage
+      # - name: Get coverage info
+      #   run: |
+      #     docker exec nodeapp ls
+      #     docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/
+      
+      # - name: List artifacts
+      #   run: |
+      #     ls artifacts/
+      #     cat artifacts/lcov.info
+
+      # - name: List artifacts 2
+      #   run: ls artifacts/coverage/coverage
 
   # verify_code:
   #   name: Verify code security and beauty.
