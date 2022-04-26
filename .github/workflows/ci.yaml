@@ -24,7 +24,7 @@ jobs:
     #     name: my-artifact
     #     path: path/to/artifact/world.txt
 
-    # - run: path/to/artifact ls
+    # - run: path/to/artifact ls 
 
       - uses: actions/checkout@v2
 
