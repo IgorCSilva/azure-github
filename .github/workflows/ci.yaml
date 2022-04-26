@@ -34,7 +34,7 @@ jobs:
 
       - name: Get coverage info
         run: |
-          docker run azure-github_nodeapp ls
+          docker exec nodeapp ls
 
   # verify_code:
   #   name: Verify code security and beauty.
