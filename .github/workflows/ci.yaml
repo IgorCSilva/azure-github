@@ -15,14 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: |
-          pwd
+      - name: Ls pwd
+        run: |
+          ls /home/runner/work/azure-github/azure-github
+
+      - name: Ls folder
+        run: |
           ls
-          cd node
-          pwd
     # - uses: actions/checkout@v2
 
-    # - run: mkdir -p path/to/artifact
+      - run: |
+          mkdir -p artifacts/store
+          cp docs.md artifacts/store/docs.md
+          ls artifacts/store
 
     # - run: echo hello > path/to/artifact/world.txt
 
