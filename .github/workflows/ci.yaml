@@ -13,7 +13,8 @@ jobs:
   check-application:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - uses: actions/checkout@v2
+        run: |
           ls
     # - uses: actions/checkout@v2
 
