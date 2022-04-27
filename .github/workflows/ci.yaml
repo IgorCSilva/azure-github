@@ -15,6 +15,8 @@ jobs:
         run: |
           echo ${{ github.ref }}
           echo ${{ github.event.pull_request.base.ref }}
+          echo ${{ github.head_ref }}
+          
       # code path: /home/runner/work/azure-github/azure-github
 
       - name: Create containers (docker-compose)
