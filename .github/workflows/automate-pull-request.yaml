@@ -20,23 +20,23 @@ jobs:
           pr_label: "feature, automated pr"
           pr_title: "[Example] Simple demo" 
 
-  # trigger-azure-pipeline:
-  #   name: Trigger Azure Pipeline
-  #   runs-on: ubuntu-latest
-  #   needs: create-pull-request
-  #   steps:
-  #   - name: Wait for other checks to succeed
-  #     uses: lewagon/wait-on-check-action@v1.0.0
-  #     with:
-  #       ref: ${{ github.ref }}
-  #       check-name: 'SonarCloud Code Analysis'
-  #       repo-token: ${{ secrets.GITHUB_TOKEN }}
-  #       wait-interval: 10
+  trigger-azure-pipeline:
+    name: Trigger Azure Pipeline
+    runs-on: ubuntu-latest
+    needs: create-pull-request
+    steps:
+    - name: Wait for other checks to succeed
+      uses: lewagon/wait-on-check-action@v1.0.0
+      with:
+        ref: ${{ github.ref }}
+        check-name: 'SonarCloud Code Analysis'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        wait-interval: 10
         
-  #   - name: Azure Pipelines Action
-  #     uses: Azure/pipelines@v1
-  #     with:
-  #       # Not use trailing slash.
-  #       azure-devops-project-url: https://dev.azure.com/show0804/azure-github
-  #       azure-pipeline-name: 'IgorCSilva.azure-github'
-  #       azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+    - name: Azure Pipelines Action
+      uses: Azure/pipelines@v1
+      with:
+        # Not use trailing slash.
+        azure-devops-project-url: https://dev.azure.com/show0804/azure-github
+        azure-pipeline-name: 'IgorCSilva.azure-github'
+        azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
