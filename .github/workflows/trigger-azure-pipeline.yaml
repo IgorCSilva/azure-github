@@ -1,8 +1,11 @@
 name: Trigger-AzurePipeline
 
-# Run this workflow every time a commit gets pushed to main or a pull request gets opened against main
+# Run this workflow every time a commit gets pushed to main or a pull request gets opened against mainn
 on:
   pull_request:
+    branches:
+      - master
+  push:
     branches:
       - master
 
@@ -10,8 +13,11 @@ jobs:
   trigger-azure-pipeline:
     name: Trigger Azure Pipeline
     runs-on: ubuntu-latest
-    needs: [verify_code]
     steps:
+    - name: Action
+      run: |
+        echo ${{ github.event_name }}
+
     - name: Wait for other checks to succeed
       uses: lewagon/wait-on-check-action@v1.0.0
       with:
