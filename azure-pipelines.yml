@@ -66,11 +66,22 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'Dockerhub'
-        repository: 'igoru23/azure-github'
+        containerRegistry: 'AzureContainerRegistry'
+        repository: 'azure-github'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/node'
         tags: |
           $(tag)
           latest
+          
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'Dockerhub'
+    #     repository: 'igoru23/azure-github'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
+    #     buildContext: '$(Build.SourcesDirectory)/node'
+    #     tags: |
+    #       $(tag)
+    #       latest
