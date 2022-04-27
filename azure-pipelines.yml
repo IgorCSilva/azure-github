@@ -18,34 +18,8 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-# - stage: verify_code
-#   displayName: Verify code beauty and security
-#   jobs:
-#   - job: vefiry_code
-#     displayName: Run sonar
-#     steps:
-#     - task: SonarCloudPrepare@1
-#       inputs:
-#         SonarCloud: 'SonarCloud'
-#         organization: 'show0804'
-#         scannerMode: 'CLI'
-#         configMode: 'manual'
-#         cliProjectKey: 'show0804_azure-github-public'
-#         cliProjectName: 'azure-github-public'
-#         cliSources: '.'
-    
-#     - task: SonarCloudAnalyze@1
-
-#     - task: SonarCloudPublish@1
-#       inputs:
-#         pollingTimeoutSec: '300'
-    # - task: SonarQubeAnalyze@5
-    # - task: SonarQubePublish@5
-    #   inputs:
-    #     pollingTimeoutSec: '300'
-
 - stage: check_application
-  displayName: Run tests and verify lint.
+  displayName: Verify lint
   jobs:
   - job: run_application
     displayName: Run application
@@ -63,8 +37,10 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          echo Foi
-          echo Show
+          cd node
+          npm install
+          npm run lint .
+
 
     # - task: CmdLine@2
     #   inputs:
@@ -80,22 +56,21 @@ stages:
     #     script: |
     #       docker run igorcsilvaazuregithub_nodeapp npx eslint app.js
 
-# - stage: buildAndPush
-#   displayName: $(labelBuildAndPush) the image
-#   jobs:
-#   - job: buildAndPush
-#     displayName: $(labelBuildAndPush)
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
-
-#     - task: Docker@2
-#       inputs:
-#         containerRegistry: 'Azure-DockerHub'
-#         repository: 'igoru23/azure-github'
-#         command: 'buildAndPush'
-#         Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
-#         buildContext: '$(Build.SourcesDirectory)/node'
-#         tags: |
-#           $(tag)
-#           latest
+- stage: buildAndPush
+  displayName: $(labelBuildAndPush) the image
+  jobs:
+  - job: buildAndPush
+    displayName: $(labelBuildAndPush)
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Dockerhub'
+        repository: 'igoru23/azure-github'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/node/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/node'
+        tags: |
+          $(tag)
+          latest

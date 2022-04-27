@@ -1,0 +1,40 @@
+name: Automate-PullRequest
+
+on:
+  pull_request:
+    branches: 
+      - master
+
+jobs: 
+  # create-pull-request:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v2
+  #     - name: pull-request
+  #       uses: repo-sync/pull-request@v2
+  #       with:
+  #         destination_branch: "master"
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         pr_label: "feature, automated pr"
+  #         pr_title: "[Example] Simple demo" 
+
+  trigger-azure-pipeline:
+    name: Trigger Azure Pipeline
+    runs-on: ubuntu-latest
+    # needs: create-pull-request
+    steps:
+    
+    - name: Check branch
+      run: |
+        echo ${{ github.ref }}
+        echo ${{ github.event.pull_request.base.ref }}
+        echo ${{ github.head_ref }}
+
+    - name: Azure Pipelines Action
+      uses: Azure/pipelines@v1
+      with:
+        # Not use trailing slash.
+        azure-devops-project-url: https://dev.azure.com/show0804/azure-github
+        azure-pipeline-name: 'IgorCSilva.azure-github'
+        azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}

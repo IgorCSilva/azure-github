@@ -1,0 +1,24 @@
+# name: Trigger-AzurePipeline
+
+# # Run this workflow every time a commit gets pushed to main or a pull request gets opened against mainn
+# on:
+#   push:
+#     branches:
+#       - develop
+
+# jobs: 
+#   trigger-azure-pipeline:
+#     name: Trigger Azure Pipeline
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Action
+#       run: |
+#         echo ${{ github.event_name }}
+        
+#     - name: Azure Pipelines Action
+#       uses: Azure/pipelines@v1
+#       with:
+#         # Not use trailing slash.
+#         azure-devops-project-url: https://dev.azure.com/show0804/azure-github
+#         azure-pipeline-name: 'IgorCSilva.azure-github'
+#         azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}

@@ -1,57 +1,70 @@
-name: CI-Sonarcloud-AzurePipeline
+name: CI-Check-aplication
 
-# Run this workflow every time a commit gets pushed to main or a pull request gets opened against main
 on:
-  # push:
-  #   branches:
-  #     - main
   pull_request:
     branches: 
-      - master
-
-      # name: Build
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     types: [opened, synchronize, reopened]
-# jobs:
-#   sonarcloud:
-#     name: SonarCloud
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-#       - name: SonarCloud Scan
-#         uses: SonarSource/sonarcloud-github-action@master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - develop
 
 jobs:
-  verify_code:
-    name: Verify code security and beauty.
+  check-application:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Check branch
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.event.pull_request.base.ref }}
+          echo ${{ github.head_ref }}
+          
+      # code path: /home/runner/work/azure-github/azure-github
+
+      - name: Create containers (docker-compose)
+        run: docker-compose up -d --build
+
+      - name: Run tests
+        run: |
+          docker exec nodeapp npm install
+          docker exec nodeapp npm test
+
+      - name: Save coverage file
+        run: |
+          mkdir -p artifacts/store
+          docker cp nodeapp:/usr/src/app/coverage/lcov.info artifacts/store/lcov.info
+      
+      - name: Check artifact files
+        run: |
+          ls artifacts/store
+          cat artifacts/store/lcov.info
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifacts/store/lcov.info
+
+  verify_code:
+    name: Verify code security and beauty.
+    runs-on: ubuntu-latest
+    needs: check-application
+    steps:
+      - uses: actions/checkout@master
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - uses: actions/download-artifact@master
+        with:
+          name: my-artifact
+          path: artifacts/store
+      
+      - name: Check downloaded artifact file
+        run: |
+          ls artifacts/store
+          cat artifacts/store/lcov.info
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  # build:
-  #   name: Call Azure Pipeline
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Azure Pipelines Action
-  #     uses: Azure/pipelines@v1
-  #     with:
-  #       # Not use trailing slash.
-  #       azure-devops-project-url: https://dev.azure.com/show0804/azure-github
-  #       azure-pipeline-name: 'IgorCSilva.azure-github'
-  #       azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+        with:
+          projectBaseDir: .
