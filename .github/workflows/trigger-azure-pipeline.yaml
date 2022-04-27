@@ -2,12 +2,12 @@ name: Trigger-AzurePipeline
 
 # Run this workflow every time a commit gets pushed to main or a pull request gets opened against mainn
 on:
-  pull_request:
-    branches:
-      - master
+  # pull_request:
+  #   branches:
+  #     - master
   push:
     branches:
-      - master
+      - develop
 
 jobs: 
   trigger-azure-pipeline:
