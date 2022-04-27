@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: Check branch
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.event.pull_request.base.ref }}
       # code path: /home/runner/work/azure-github/azure-github
 
       - name: Create containers (docker-compose)

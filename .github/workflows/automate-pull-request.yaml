@@ -23,7 +23,13 @@ jobs:
     name: Trigger Azure Pipeline
     runs-on: ubuntu-latest
     # needs: create-pull-request
-    steps:        
+    steps:
+    
+    - name: Check branch
+      run: |
+        echo ${{ github.ref }}
+        echo ${{ github.event.pull_request.base.ref }}
+
     - name: Azure Pipelines Action
       uses: Azure/pipelines@v1
       with:
