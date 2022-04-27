@@ -39,7 +39,7 @@ stages:
         script: |
           cd node
           npm install
-          npx eslint .
+          npm run lint .
 
 
     # - task: CmdLine@2
