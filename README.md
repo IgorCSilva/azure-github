@@ -1,3 +1,9 @@
+## Table
+| Master | Develop |
+| --- | --- |
+| ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg?branch=master) | List all new or modified files |
+| ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg?branch=master) | Show file differences that haven't been staged |
+
 ## Stats
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IgorCSilva&show_icons=true)]
 
