@@ -19,6 +19,14 @@ jobs:
   #         pr_label: "feature, automated pr"
   #         pr_title: "[Example] Simple demo" 
 
+  no-develop:
+    name: No develop
+    if: github.head_ref != 'develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify no develop
+        run: echo Use develop branch to create pull request.
+        
   trigger-azure-pipeline:
     name: Trigger Azure Pipeline
     if: github.head_ref == 'develop'
