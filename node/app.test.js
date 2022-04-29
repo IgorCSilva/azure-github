@@ -14,7 +14,7 @@ function subTest() {
   expect(calc.sub(2, 2)).toBe(0);
 }
 function mulTest() {
-  expect(calc.mul(2, 2)).toBe(0);
+  expect(calc.mul(2, 2)).toBe(1);
 }
 
 function asTest() {
