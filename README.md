@@ -1,8 +1,8 @@
 ## Table
-| Master | Develop | Last Action |
+| Workflow | Develop | Last Action |
 | --- | --- | --- |
-| ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg?branch=master) | --- | ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg) |
-| ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg?branch=master) | ![action status](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg?branch=develop) | ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg) |
+| CI-Check-Application |  | ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg) |
+| Automate-PullRequest | ![action status](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg?branch=develop) | ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg) |
 
 ## Stats
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IgorCSilva&show_icons=true)]
