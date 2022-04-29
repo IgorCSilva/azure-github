@@ -1,3 +1,6 @@
+## Workflows
+![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg)
+![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/automate-pull-request.yaml/badge.svg)
 ## Master
 ### example branch parameter
 ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg?branch=master)
