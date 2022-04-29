@@ -1,5 +1,5 @@
 ## Stats
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IgorCSilva)](https://github.com/anuraghazra/github-readme-stats)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IgorCSilva&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
 ## Workflows
 ![example branch parameter](https://github.com/IgorCSilva/azure-github/actions/workflows/ci.yaml/badge.svg)
